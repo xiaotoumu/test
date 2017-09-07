@@ -1,11 +1,5 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Login from 'components/login';
-import Business from 'components/business';
-import Loandetail from 'components/loan_detail';
-import Executive from 'components/executive';
-import Ywdetail from 'components/yw_detail';
-import Edit from 'components/edit';
 Vue.use(Router);
 Router.prototype.goBack = function () {
   this.isBack = true;
@@ -16,32 +10,32 @@ export default new Router({
     {
       path: '/',
       name: 'Login',
-      component: Login
+      component: resolve => require(['components/login'], resolve) /* <== 主要代码是这 */
     },
     {
       path: '/business',
       name: 'business',
-      component: Business
+      component: resolve => require(['components/business'], resolve) /* <== 主要代码是这 */
     },
     {
       path: '/loan_detail',
       name: 'loan_detail',
-      component: Loandetail
+      component: resolve => require(['components/loan_detail'], resolve) /* <== 主要代码是这 */
     },
     {
       path: '/executive',
       name: 'executive',
-      component: Executive
+      component: resolve => require(['components/executive'], resolve) /* <== 主要代码是这 */
     },
     {
       path: '/yw_detail',
       name: 'yw_detail',
-      component: Ywdetail
+      component: resolve => require(['components/yw_detail'], resolve) /* <== 主要代码是这 */
     },
     {
       path: '/edit',
       name: 'edit',
-      component: Edit
+      component: resolve => require(['components/edit'], resolve) /* <== 主要代码是这 */
     }
   ]
 });

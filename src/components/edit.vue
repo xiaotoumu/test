@@ -1,22 +1,35 @@
 <template>
   <div class="loan_detail">
-       <mt-header title="贷款人详细信息">
-       <a @click="goBack" slot="left">
-        <mt-button icon="back">返回</mt-button>
+       <yd-navbar title="贷款人详细信息">
+      <a @click="goBack" slot="left">
+          <yd-navbar-back-icon>返回</yd-navbar-back-icon>
       </a>
-      <mt-button icon="more" slot="right"></mt-button>
-    </mt-header> 
-
-     <mt-field label="姓名" placeholder="请输入用户名" v-model="username" ></mt-field>
-    <mt-field label="身份证号"  placeholder="请输入身份证号" type="number"></mt-field>
-    <mt-field label="联系电话" placeholder="请输入手机号" type="tel" ></mt-field>
-    <mt-checklist title="贷款方式" v-model="value" :options="['房贷', '押车']"></mt-checklist>
-    <mt-checklist title="业务类型" v-model="value" :options="['方式一', '方式二']"></mt-checklist>
-    <textarea class="form-control" placeholder="意见评定" rows="4"></textarea>
-    <div class="submit">
-      <mt-button size="small" type="primary">提交通过</mt-button>
-      <mt-button size="small" type="danger">打回信息</mt-button>
-    </div>
+    </yd-navbar>
+    <yd-cell-group>
+        <yd-cell-item>
+            <span slot="left">用户名：</span>
+            <yd-input slot="right" required v-model="input1" max="20" placeholder="请输入用户名"></yd-input>
+        </yd-cell-item>
+        <yd-cell-item>
+            <span slot="left">身份证号：</span>
+            <yd-input slot="right" type="number"  v-model="input2" placeholder="请输入密码"></yd-input>
+        </yd-cell-item>
+        <yd-cell-item arrow type="label">
+           <span slot="left">业务类型：</span>
+            <select slot="right">
+                <option value="">押本押车</option>
+                <option value="1">房抵押</option>
+                <option value="2">押车不押本</option>
+            </select>
+        </yd-cell-item>
+        <yd-cell-item arrow type="label">
+           <span slot="left">贷款方式：</span>
+            <select slot="right">
+                <option value="">贷款方式一</option>
+                <option value="1">贷款方式二</option>
+            </select>
+        </yd-cell-item>
+    </yd-cell-group>
   </div> 
 </template>
 
@@ -27,10 +40,13 @@
         username: '',
         email: '',
         password: '',
-        tel: '',
-        url: '',
-        number: '',
-        value: []
+        input1: '',
+        input2: '',
+        input3: '',
+        input8: '',
+        input9: '',
+        input12: '',
+        result: ''
       };
     },
     methods: {
@@ -42,38 +58,5 @@
 </script>
 
 <style lang="stylus">
-  h1
-    margin-bottom 0
-    margin-top 0
-.mint-field-core
-  line-height 1    
-.mint-button-text
-  font-weight normal 
-  margin-bottom 0   
-.mint-checklist-label
-  font-weight normal 
-.loan_detail
-  height 100%
-  overflow auto
-  position relative
-  .mint-header
-    height auto
-    background-color rgba(0,102,153,0.78)
-    .mint-button
-      .mint-button-text
-        margin-bottom 0
-        font-weight normal
-  .mint-cell
-    text-decoration none  
-    .mint-cell-text
-      font-size 14px
-  .mint-checklist
-    .mint-checklist-title
-      font-size 14px
-      padding 0 10px
-      color #000
-      margin 0
-      font-weight normal
-  .submit
-    display inline-block
+ @import '../base/css/detail'
 </style>

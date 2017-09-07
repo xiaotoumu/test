@@ -3,13 +3,18 @@
 import Vue from 'vue';
 import App from './App';
 import router from './router';
-import MintUI from 'mint-ui';
-import 'mint-ui/lib/style.css';
-import fastclick from 'fastclick';
+import YDUI from 'vue-ydui';
+import 'vue-ydui/dist/ydui.rem.css';
+import {Icons} from 'vue-ydui/dist/lib.rem/icons';
+import 'vue-ydui/dist/ydui.base.css';
+Vue.component(Icons.name, Icons);
+import FastClick from 'fastclick';
 require('./mock.js');
-Vue.use(MintUI);
+Vue.use(YDUI);
 Vue.config.productionTip = false;
-fastclick.attach(document.body);
+document.addEventListener('DOMContentLoaded', function () {
+  FastClick.attach(document.body);
+}, false);
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

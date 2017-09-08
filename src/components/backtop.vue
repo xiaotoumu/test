@@ -2,7 +2,7 @@
     <yd-backtop></yd-backtop>
 </template>
 
-<script type="text/babel">
+<script>
   export default {
 };
 

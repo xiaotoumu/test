@@ -1,39 +1,86 @@
 <template>
   <div class="loan_detail">
-       <yd-navbar title="贷款人详细信息">
-      <a @click="goBack" slot="left">
-          <yd-navbar-back-icon>返回</yd-navbar-back-icon>
+       <yd-navbar title="贷款人详细信息"  bgcolor="rgba(0,102,153,0.78)" color="#fff">
+      <a @click="goBack"  slot="left">
+          <yd-navbar-back-icon color="#fff"></yd-navbar-back-icon>
       </a>
     </yd-navbar>
-    <yd-cell-group>
-        <yd-cell-item>
-            <span slot="left">用户名：</span>
-            <yd-input slot="right" required v-model="input1" max="20" placeholder="请输入用户名"></yd-input>
-        </yd-cell-item>
-        <yd-cell-item>
-            <span slot="left">身份证号：</span>
-            <yd-input slot="right" type="number"  v-model="input2" placeholder="请输入密码"></yd-input>
-        </yd-cell-item>
-        <yd-cell-item arrow type="label">
-           <span slot="left">业务类型：</span>
-            <select slot="right">
-                <option value="">押本押车</option>
-                <option value="1">房抵押</option>
-                <option value="2">押车不押本</option>
-            </select>
-        </yd-cell-item>
-        <yd-cell-item arrow type="label">
-           <span slot="left">贷款方式：</span>
-            <select slot="right">
-                <option value="">贷款方式一</option>
-                <option value="1">贷款方式二</option>
-            </select>
-        </yd-cell-item>
-    </yd-cell-group>
+      <div>
+        <div class="yd-grids-2">
+          <div class="yd-grids-item">
+            <div class="yd-grids-txt">
+              <span>真实姓名：</span>
+            </div>
+          </div>
+          <div class="yd-grids-item" >
+            <div class="yd-grids-txt">
+              <span>{{pages.name}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="yd-grids-2">
+          <div class="yd-grids-item">
+            <div class="yd-grids-txt">
+              <span>手机号码：</span>
+            </div>
+          </div>
+          <div class="yd-grids-item" >
+            <div class="yd-grids-txt">
+              <span>{{pages.phone}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="yd-grids-2">
+          <div class="yd-grids-item">
+            <div class="yd-grids-txt">
+              <span>身份证号：</span>
+            </div>
+          </div>
+          <div class="yd-grids-item" >
+            <div class="yd-grids-txt">
+              <span>{{pages.idr}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="yd-grids-2">
+          <div class="yd-grids-item">
+            <div class="yd-grids-txt">
+              <span>业务类型：</span>
+            </div>
+          </div>
+          <div class="yd-grids-item" >
+            <div class="yd-grids-txt">
+              <span>{{pages.fd}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="yd-grids-2">
+          <div class="yd-grids-item">
+            <div class="yd-grids-txt">
+              <span>证件照片：</span>
+            </div>
+          </div>
+          <div class="yd-grids-item" >
+            <div class="yd-grids-txt">
+              <img :src="pages.img">
+            </div>
+          </div>
+        </div>
+      </div>
+       <yd-button size="large" bgcolor="rgba(0,102,153,0.78)" color="#fff" type="primary">保存并通过</yd-button>
   </div> 
 </template>
 
 <script>
+  import axios from 'axios';
   export default {
     data () {
       return {
@@ -46,12 +93,22 @@
         input8: '',
         input9: '',
         input12: '',
-        result: ''
+        result: '',
+        pages: ''
       };
+    },
+    created () {
+      this.getDate();
     },
     methods: {
       goBack () {
         this.$router.back(); //  返回上一级
+      },
+      getDate () {
+        axios.get(`/index/edit`).then((res) => {
+          this.pages = res.data.list;
+          console.log(this.pages);
+        });
       }
     }
   };

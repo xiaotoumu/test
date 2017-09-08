@@ -1,70 +1,27 @@
 <template>
   <div class="business">
-     <div class="business_page">
+    <div class="business_page">
        <i class="iconfont icon-fanhui" @click="goBack"></i>
        贷款业务
-       </div>
-     <div class="loan_page">贷前业务</div>
-     <div class="create_loan">
-       <router-link :to="{path: '/loan_detail'}" class="create_loan_zi">
-         创建贷款业务
-        <i class="iconfont icon-jia"></i>
-       </router-link>
-     </div>
-      <div class="no_pass">
-       <div class="no_pass_page">审核未通过列表</div>
-      <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>名称</th>
-          <th>电话</th>
-          <th>身份证号</th>
-          <th>业务类型</th>
-          <th>修改</th>
-        </tr>
-      </thead>
-      <tbody> 
-        <tr v-for="(items, index) in pages" :key="index">
-          <td>{{items.name}}</td>
-          <td>{{items.phone}}</td>
-          <td>{{items.idr}}</td>
-           <td>{{items.fd}}</td>
-          <td> <router-link :to="{path:'/loan_detail'}">{{items.xg}}</router-link></td>
-        </tr>
-      </tbody>
-    </table>
     </div>
-
-    <div class="daihou">
-       <div class="daihou_da">贷后业务</div>
-      <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>名称</th>
-          <th>电话</th>
-          <th>身份证号</th>
-          <th>业务类型</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr  v-for="(vals, index) in pages" :key="index">
-          <td>{{vals.name}}</td>
-          <td>{{vals.phone}}</td>
-          <td>{{vals.idr}}</td>
-          <td>{{vals.fd}}</td>
-        </tr>
-      </tbody>
-    </table>
-    </div>
+    <div class="loan_page">贷前业务</div>
+        <tables></tables>
+    <BackTop></BackTop>
 </div>
 </template>
 <script>
+import Tables from 'components/table';
+import BackTop from 'components/backtop';
 import axios from 'axios';
 export default {
   data () {
     return {
       pages: ''
     };
+  },
+  components: {
+    BackTop,
+    Tables
   },
   created () {
     this.$nextTick(() => {
@@ -76,7 +33,7 @@ export default {
       this.$router.back();
     },
     getDate () {
-      axios.get(`http://g.cn`).then((res) => {
+      axios.get(`/index/List`).then((res) => {
         this.pages = res.data.list;
       });
     }

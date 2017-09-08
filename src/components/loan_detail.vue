@@ -1,8 +1,8 @@
 <template>
   <div class="loan_detail">
-    <yd-navbar title="贷款人详细信息">
+    <yd-navbar title="贷款人详细信息" bgcolor="rgba(0,102,153,0.78)" color="#fff">
       <a @click="goBack" slot="left">
-          <yd-navbar-back-icon></yd-navbar-back-icon>
+          <yd-navbar-back-icon color="#fff"></yd-navbar-back-icon>
       </a>
     </yd-navbar>
     <yd-cell-group>
@@ -38,21 +38,22 @@
           </div>
           </div>
         </div>
-       <yd-cell-group>
-            <yd-cell-item>
-                <span slot="left">手机号：</span>
-                <yd-input slot="right" v-model="input9" ref="input9" required regex="^1[3-9]\d{9}$" placeholder="请输入手机号码"></yd-input>
-            </yd-cell-item>
-            <p slot="bottom" style="color:#F00;padding: 0 .3rem;" v-html="result"></p>
+        <yd-cell-group class="process">
+          <yd-cell-item>
+            <yd-icon slot="icon" name="phone3"  size=".45rem"></yd-icon>
+            <span slot="left">手机号：</span>
+            <yd-input slot="right" v-model="input9" ref="input9" required regex="^1[3-9]\d{9}$" placeholder="请输入手机号码"></yd-input>
+          </yd-cell-item>
+          <p slot="bottom" style="color:#F00;padding: 0 .3rem;" v-html="result"></p>
         </yd-cell-group>
-    <yd-cell-group title="意见评定">
-        <yd-cell-item>
-          <yd-icon name="footmark"></yd-icon>
+        <yd-cell-group title="意见评定">
+          <yd-cell-item>
+            <yd-icon name="footmark"></yd-icon>
             <yd-textarea slot="right" placeholder="请给出意见评定" maxlength="100"></yd-textarea>
-        </yd-cell-item>
-    </yd-cell-group>
-         <yd-button type="primary">primary</yd-button>
-        <yd-button type="danger">danger</yd-button>
+          </yd-cell-item>
+        </yd-cell-group>
+        <yd-button size="large" bgcolor="rgba(0,102,153,0.78)" color="#fff" type="primary">通过审核</yd-button>
+        <yd-button size="large" type="danger">打回信息</yd-button>
     </yd-cell-group>
   </div> 
 </template>
@@ -77,19 +78,6 @@
     methods: {
       goBack () {
         this.$router.back();
-      },
-      // 验证码发送
-      sendCode1 () {
-        this.$dialog.loading.open('发送中...');
-        setTimeout(() => {
-          this.start1 = true;
-          this.$dialog.loading.close();
-          this.$dialog.toast({
-            mes: '已发送',
-            icon: 'success',
-            timeout: 1500
-          }, 1000);
-        });
       }
     }
   };
